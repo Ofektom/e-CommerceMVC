@@ -3,7 +3,8 @@ package com.ofektom.springtry.serviceImpl;
 import com.ofektom.springtry.models.Cart;
 import com.ofektom.springtry.models.Order;
 import com.ofektom.springtry.models.Product;
-import com.ofektom.springtry.repository.ProductRepository;
+import com.ofektom.springtry.models.Users;
+import com.ofektom.springtry.repository.ProductRepositories;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,41 +20,58 @@ import java.util.function.Supplier;
 
 @Service
 public class ProductServiceImpl {
-    private ProductRepository productRepository;
+
+    private ProductRepositories productRepositories;
+
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository){
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductRepositories productRepositories) {
+        this.productRepositories = productRepositories;
     }
 
-    public Supplier<List<Product>> findAllProducts = () ->productRepository.findAll();
-    public Function<Long, Product> findById = (id)-> productRepository.findById(id).orElseThrow(()->new NullPointerException("No such product found with ID" + id));
-    public void addProductToCart(Long id, HttpServletRequest request){
+    public Supplier<List<Product>> findAllProducts = ()->productRepositories.findAll();
+    public Function<Long, Product> findById = (id)->
+            productRepositories.findById(id)
+                    .orElseThrow(()->
+                            new NullPointerException("No such product found with ID: "+ id));
+
+    public Function<Product, Product> addNewProduct = (product)->productRepositories.save(product);
+
+    public void addProductToCart(Long id, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Cart cart;
-        if(session.getAttribute("cart")!=null){
+        if (session.getAttribute("cart")!=null){
             cart = (Cart) session.getAttribute("cart");
-            cart.setProductIds(cart.getProductIds() + "," + id);
+            cart.setProductIds(cart.getProductIds()+","+ id);
+            session.setAttribute("cartItems", cart.getProductIds().split(",").length);
+        }
+        else {
+            cart = Cart.builder().productIds(id.toString())
+                    .userId((Long) session.getAttribute("userID")).build();
+            session.setAttribute("cart", cart);
             session.setAttribute("cartItems", cart.getProductIds().split(",").length);
         }
     }
-    public void checkOutCart(HttpSession session, Model model){
+
+    public void checkOutCart(HttpSession session, Model model) {
         Cart cart = (Cart) session.getAttribute("cart");
         List<Product> productList = new ArrayList<>();
         List<String> productIds = Arrays.stream(cart.getProductIds().split(",")).toList();
         productIds.forEach(id->{
-            productList.add(productRepository.findById(Long.parseLong(id)).orElseThrow(()->
-                    new NullPointerException("No such product found with ID: " + id)));
+            productList.add(productRepositories.findById(Long.parseLong(id)).orElseThrow(()->
+                    new NullPointerException("No such product found with ID: "+ id)));
         });
+
         final BigDecimal[] totalPrice = {new BigDecimal(0)};
         productList.forEach(product -> totalPrice[0] = totalPrice[0].add(product.getPrice()));
         model.addAttribute("totalPrice", "Total Price: $"+ totalPrice[0]);
         session.setAttribute("cart", null);
         Order order = Order.builder()
                 .productList(productList)
-                .userId((Long) session.getAttribute("userId"))
+                .userId((Long) session.getAttribute("userID"))
                 .totalPrice(totalPrice[0])
                 .build();
         session.setAttribute("order", order);
         model.addAttribute("order", order);
     }
+
 }

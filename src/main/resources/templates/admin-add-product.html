@@ -23,7 +23,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 40px 80px;
-      background: #e3e6f3;
+      background: #bddadb;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
       z-index: 999;
       position: sticky;
@@ -79,8 +79,8 @@
     }
     .user-login #hero {
       display: block;
-      position relative
-      padding 50px 100px 50px 100px
+      position: relative;
+      padding: 50px 100px 50px 100px;
       margin: auto;
       width: 400px;
       height: 400px;
@@ -92,7 +92,7 @@
       height: 150vh;
       width: 100%;
       background-size: 140px;
-      background-position: top 25% right 3;
+      background-position: top 25%;
       padding: 0 40px;
       display: flex;
       flex-direction: column;
@@ -129,7 +129,7 @@
       text-align: center;
       padding: 25px 15px;
       box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
-      border: 1px solid #bddadb;
+      border: 1px solid #cce7d0;
       border-radius: 4px;
       margin: 2rem 5rem;
     }
@@ -139,7 +139,6 @@
 
   </style>
   <title>FASHION SHOP</title>
-  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
@@ -148,14 +147,22 @@
   <a href="#"><img src="https://seeklogo.com/images/F/fashion-shop-clothes-hanger-logo-C4A9A1FA8C-seeklogo.com.png" alt="logo"></a>
   <div>
     <ul id="navbar">
-      <li><a class="active" href="index.html">Shop</a></li>
+      <li><a class="active" href="/">Shop</a></li>
       <li><a href="/user/login">Customer</a></li>
-      <li><a href="/admin/register">Admin</a></li>
+      <li><a href="/user/register">Admin</a></li>
       <li><a href="checkout.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
     </ul>
   </div>
 </section>
-<b th:text="${paid}"></b>
-<a href="/products/all">Continue Shopping</a>
+Add Product
+
+<form method="post" action="/products/add-product" th:object="${product}">
+  Product Name:<input th:field="*{productName}">
+  price:<input th:field="*{price}">
+  Quantity:<input th:field="*{quantity}">
+  Category:<input th:field="*{categories}">
+  <button type="submit">Add product</button>
+
+</form>
 </body>
 </html>

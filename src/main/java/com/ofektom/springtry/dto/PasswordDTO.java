@@ -1,15 +1,15 @@
 package com.ofektom.springtry.dto;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class UserDto {
-    private String username;
+@NoArgsConstructor
+public class PasswordDTO {
     private String password;
-    private String fullName;
+    private String hashPassword;
 }

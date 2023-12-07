@@ -1,10 +1,159 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Product Application</title>
+    <style type="text/css" >
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+            width: 100%;
+
+        }
+        body {
+            height: 600px;
+            width: 100%;
+            position: absolute
+        }
+
+        #header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 80px;
+            background: #bddadb;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+            z-index: 999;
+            position: sticky;
+            top: 0;
+            left: 0;
+        }
+
+        #navbar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #navbar li{
+            list-style: none;
+            padding: 0 20px;
+            position: relative;
+        }
+        #navbar li a{
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: 0.3s ease;
+            font-family: Ibarra Real Nova;;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 2px;
+            /* text-transform: uppercase; */
+        }
+        #navbar li a:hover,
+        #navbar li a.active{
+            color: #088178;
+        }
+        #navbar li a.active::after,
+        #navbar li a:hover::after{
+            content: "";
+            width: 30%;
+            height: 2px;
+            background:  #088178;;
+            position: absolute;
+            bottom: -4px;
+            left: 20px;
+        }
+
+        /*Home page  */
+        img{
+            width: 120px;
+            height: 100px;
+        }
+
+        .login{
+            height: 200px;
+        }
+        .user-login #hero {
+            display: block;
+            position: relative;
+            padding: 50px 100px 50px 100px;
+            margin: auto;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+        }
+        #hero{
+            /* background-image: url("https://images.pexels.com/photos/3568518/pexels-photo-3568518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
+            height: 150vh;
+            width: 100%;
+            background-size: 140px;
+            background-position: top 25%;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            /* background-attachment: fixed;
+            background-repeat: no-repeat; */
+
+        }
+        #hero h4{
+            padding-bottom: 15px;
+        }
+        #hero h1{
+            color: #088178;
+            padding-bottom: 15px;
+        }
+
+        #hero button{
+            /* background-image: url("https://images.pexels.com/photos/3568650/pexels-photo-3568650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
+            background-color: #088178;
+            border: 0;
+            color: #fff;
+            padding: 10px 40px 10px 40px;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        #hero p{
+            padding-bottom: 1px;
+        }
+        #feature .fe-box{
+            width: 180px;
+            text-align: center;
+            padding: 25px 15px;
+            box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+            border: 1px solid #cce7d0;
+            border-radius: 4px;
+            margin: 2rem 5rem;
+        }
+        #feature .fe-box:hover{
+            box-shadow: 10px 10px 54px rgb(70,62,221,0.1);
+        }
+
+    </style>
+    <title>FASHION SHOP</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
+<section id="header">
+    <a href="#"><img src="https://seeklogo.com/images/F/fashion-shop-clothes-hanger-logo-C4A9A1FA8C-seeklogo.com.png" alt="logo"></a>
+    <div>
+        <ul id="navbar">
+            <li><a class="active" href="/">Shop</a></li>
+            <li><a href="/user/login">Customer</a></li>
+            <li><a href="checkout.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        </ul>
+    </div>
+</section>
 Welcome <p th:text="${userID}"></p>
 <a href="/user/logout">logout</a>
 
