@@ -74,69 +74,66 @@
       height: 100px;
     }
 
-    .login{
-      height: 200px;
+    h1{
+      font-family: 'Hammersmith One', sans-serif;
+      font-size: 50px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      letter-spacing: 2px;
     }
-    .user-login #hero {
-      display: block;
-      position: relative;
-      padding: 50px 100px 50px 100px;
-      margin: auto;
-      width: 400px;
-      height: 400px;
-      display: flex;
-      justify-content: center;
-    }
-    #hero{
-      /* background-image: url("https://images.pexels.com/photos/3568518/pexels-photo-3568518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
-      height: 150vh;
+    #home-second {
+      height: 600px;
       width: 100%;
-      background-size: 140px;
+      background-size: 1500px;
       background-position: top 25%;
       padding: 0 40px;
+      color: aliceblue;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      /* background-attachment: fixed;
-      background-repeat: no-repeat; */
+      /*background-attachment: fixed;*/
+      /*background-repeat: no-repeat;*/
 
     }
-    #hero h4{
-      padding-bottom: 15px;
-    }
-    #hero h1{
-      color: #088178;
-      padding-bottom: 15px;
+    #feature{
+      background-color: aliceblue;
     }
 
-    #hero button{
-      /* background-image: url("https://images.pexels.com/photos/3568650/pexels-photo-3568650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
-      background-color: #088178;
-      border: 0;
-      color: #fff;
-      padding: 10px 40px 10px 40px;
-      background-repeat: no-repeat;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 15px;
-    }
-    #hero p{
-      padding-bottom: 1px;
-    }
     #feature .fe-box{
-      width: 180px;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
       text-align: center;
+
+    }
+    #feature .fe-container{
       padding: 25px 15px;
       box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
       border: 1px solid #cce7d0;
       border-radius: 4px;
       margin: 2rem 5rem;
+      background-color: white;
     }
+
     #feature .fe-box:hover{
       box-shadow: 10px 10px 54px rgb(70,62,221,0.1);
     }
+    p{
 
+    }
+    footer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #088178;
+      height: 50px;
+      width: auto;
+      color: white;
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
   <title>FASHION SHOP</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -154,36 +151,58 @@
     </ul>
   </div>
 </section>
-<section >
-<table id="view-product" th:each="product: ${products}">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Quantity</th>
-    <th>Price</th>
-    <th>Categories</th>
-    <th>Edit/Delete</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td th:text="${product.ProductName}"></td>
-    <td th:text="${product.quantity}"></td>
-    <td th:text="${product.price}"></td>
-    <td th:text="${product.categories}"></td>
+<section id="home-second">
+  <table>
+    <div th:text="${cartItems}"></div>
+    <thead>
+    <td>Product Name</td>
+    <td>Categories</td>
+    <td>Price</td>
+    <td>Quantity</td>
+    <td>Add cart</td>
+    </thead>
+    <tr th:each="product: ${products}">
+      <td th:text="${product.productName}"></td>
+      <td th:text="${product.categories}"></td>
+      <td th:text="${product.price}"></td>
+      <td th:text="${product.quantity}"></td>
+      <td ><a th:href="@{/products/add-cart(cart=${product.id})}">Add to cart</a></td>
+    </tr>
+    <a href="/products/payment">Proceed checkout</a>
+  </table>
+<!--<table id="view-product">-->
+<!--  <div th:text="${cartItems}"></div>-->
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>Product Name</th>-->
+<!--    <th>Quantity</th>-->
+<!--    <th>Price</th>-->
+<!--    <th>Categories</th>-->
+<!--    <th>Edit/Delete</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr th:each="product: ${products}">-->
+<!--    <td th:text="${product.productName}"></td>-->
+<!--    <td th:text="${product.quantity}"></td>-->
+<!--    <td th:text="${product.price}"></td>-->
+<!--    <td th:text="${product.categories}"></td>-->
+<!--&lt;!&ndash;    <td>&ndash;&gt;-->
+<!--&lt;!&ndash;      <img th:src="${product.image}" style="width: 200px;" class="product-image" alt="Product Image">&ndash;&gt;-->
+<!--&lt;!&ndash;    </td>&ndash;&gt;-->
 <!--    <td>-->
-<!--      <img th:src="${product.image}" style="width: 200px;" class="product-image" alt="Product Image">-->
+<!--&lt;!&ndash;      <a th:href="'product?edit=' + ${product.id}">Edit</a>&ndash;&gt;-->
+<!--&lt;!&ndash;      <a th:href="'product?delete=' + ${product.id}">Delete</a>&ndash;&gt;-->
 <!--    </td>-->
-    <td>
-      <a th:href="'product?edit=' + ${product.id}">Edit</a>
-      <a th:href="'product?delete=' + ${product.id}">Delete</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<!--  </tr>-->
+<!--  </tbody>-->
+<!--</table>-->
 
 <a href="admin-view-product.html" class="btn"><i class="fa-solid fa-arrows-rotate"></i></a>
 <a href="admin-add-product.html" class="btn add-more-btn">Add More Product</a>
 </section>
+<footer>
+  <p>&copy ofektom fashion shop  ||  +2347060926577</p>
+</footer>
 </body>
 </html>

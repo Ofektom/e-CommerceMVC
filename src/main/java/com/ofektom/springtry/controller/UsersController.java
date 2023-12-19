@@ -44,7 +44,7 @@ public class UsersController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute UsersDTO usersDTO, HttpServletRequest request, Model model){
+    public String loginUser(@ModelAttribute UsersDTO usersDTO, HttpServletRequest request){
         Users user = usersService.findUsersByUsername.apply(usersDTO.getUsername());
         log.info("User details ---> {}", user);
         if (usersService.verifyUserPassword
@@ -54,10 +54,29 @@ public class UsersController {
                         .build())){
             HttpSession session = request.getSession();
             session.setAttribute("userID", user.getId());
-            return "redirect:/products/all";
+            return "dashboard";
         }
         return "redirect:/user/login";
     }
+
+//    @PostMapping("/login")
+//    public String loginUser(@ModelAttribute UsersDTO usersDTO, @RequestParam(name = "cart")String something, HttpServletRequest request){
+//        Users user = usersService.findUsersByUsername.apply(usersDTO.getUsername());
+//        log.info("User details ---> {}", user);
+//        if (usersService.verifyUserPassword
+//                .apply(PasswordDTO.builder()
+//                        .password(usersDTO.getPassword())
+//                        .hashPassword(user.getPassword())
+//                        .build())){
+//            HttpSession session = request.getSession();
+//            session.setAttribute("userID", user.getId());
+//            if (something!=null){
+//                return "redirect:/products/all-cart";
+//            }
+//            throw new NullPointerException("No such product found with ID: " );
+//        }
+//        return "redirect:/user/login";
+//    }
 
 
     @GetMapping("/logout")

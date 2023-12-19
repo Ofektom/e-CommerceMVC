@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <style type="text/css" >
-
-        @import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
-
-
         * {
             margin: 0;
             padding: 0;
@@ -19,8 +15,7 @@
         body {
             height: 600px;
             width: 100%;
-            position: absolute;
-
+            position: absolute
         }
 
         #header{
@@ -50,7 +45,7 @@
             text-decoration: none;
             color: #1a1a1a;
             transition: 0.3s ease;
-            font-family: Ibarra Real Nova,serif;
+            font-family: Ibarra Real Nova;;
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
@@ -80,16 +75,20 @@
         }
 
         h1{
+            color: red;
+            font-size: 50px;
+            text-decoration: none;
+        }
+
+        h2{
+            text-decoration: none;
             font-family: 'Hammersmith One', sans-serif;
             font-size: 50px;
             font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-            letter-spacing: 2px;
+            color: #088178;
         }
         #home-second {
-            background-image: url("https://cdn.pixabay.com/photo/2017/03/20/15/13/wrist-watch-2159351_1280.jpg");
-            height: 950px;
+            height: 600px;
             width: 100%;
             background-size: 1500px;
             background-position: top 25%;
@@ -140,7 +139,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
     </style>
     <title>FASHION SHOP</title>
     <link rel="stylesheet" href="css/style.css">
@@ -152,15 +150,16 @@
     <a href="#"><img src="https://seeklogo.com/images/F/fashion-shop-clothes-hanger-logo-C4A9A1FA8C-seeklogo.com.png" alt="logo"></a>
     <div>
         <ul id="navbar">
-            <li><a class="active" href="/">Shop</a></li>
+            <li><a  href="/">Shop</a></li>
             <li><a href="/user/login">Customer</a></li>
-            <li><a href="/admin/admin-login">Admin</a></li>
-            <li><a href="products/noCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="/admin/admin-login" >Sign up</a></li>
+            <li><a class="active" href="checkout.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
         </ul>
     </div>
 </section>
 <section id="home-second">
-    <h1><em>Looking</em> Good<br> is <strong>GOOD BUSINESS</strong></h1>
+    <span><h2>Sign up</h2><a href="/user/register"><h1>here</h1> </a> <h2>to add to cart</h2></span><br><h2><em>Or</em> </h2>
+    <span><a href="/user/login"><h1>login</h1> </a> <h2>if you have an account already</h2></span>
 </section>
 <section id="feature">
     <div class="fe-box">

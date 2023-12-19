@@ -28,23 +28,35 @@ public class ProductServiceImpl {
         this.productRepositories = productRepositories;
     }
 
-    public Supplier<List<Product>> findAllProducts = ()->productRepositories.findAll();
-    public Function<Long, Product> findById = (id)->
+    public Supplier<List<Product>> findAllProducts = () -> productRepositories.findAll();
+    public Function<Long, Product> findById = (id) ->
             productRepositories.findById(id)
-                    .orElseThrow(()->
-                            new NullPointerException("No such product found with ID: "+ id));
+                    .orElseThrow(() ->
+                            new NullPointerException("No such product found with ID: " + id));
 
-    public Function<Product, Product> addNewProduct = (product)->productRepositories.save(product);
+    public void addNewProduct(String category, BigDecimal price, String productName, Long quantity) {
+        // Create a new product with the provided details
+        Product newProduct = Product.builder()
+                .categories(category)
+                .price(price)
+                .productName(productName)
+                .quantity(quantity)
+                // You might set other properties here
+                .build();
+
+        // Save the new product to the repository or perform other necessary actions
+        productRepositories.save(newProduct);
+    }
+//    public Function<Product, Product> addNewProduct = (product)->productRepositories.save(product);
 
     public void addProductToCart(Long id, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Cart cart;
-        if (session.getAttribute("cart")!=null){
+        if (session.getAttribute("cart") != null) {
             cart = (Cart) session.getAttribute("cart");
-            cart.setProductIds(cart.getProductIds()+","+ id);
+            cart.setProductIds(cart.getProductIds() + "," + id);
             session.setAttribute("cartItems", cart.getProductIds().split(",").length);
-        }
-        else {
+        } else {
             cart = Cart.builder().productIds(id.toString())
                     .userId((Long) session.getAttribute("userID")).build();
             session.setAttribute("cart", cart);
@@ -56,14 +68,14 @@ public class ProductServiceImpl {
         Cart cart = (Cart) session.getAttribute("cart");
         List<Product> productList = new ArrayList<>();
         List<String> productIds = Arrays.stream(cart.getProductIds().split(",")).toList();
-        productIds.forEach(id->{
-            productList.add(productRepositories.findById(Long.parseLong(id)).orElseThrow(()->
-                    new NullPointerException("No such product found with ID: "+ id)));
+        productIds.forEach(id -> {
+            productList.add(productRepositories.findById(Long.parseLong(id)).orElseThrow(() ->
+                    new NullPointerException("No such product found with ID: " + id)));
         });
 
         final BigDecimal[] totalPrice = {new BigDecimal(0)};
         productList.forEach(product -> totalPrice[0] = totalPrice[0].add(product.getPrice()));
-        model.addAttribute("totalPrice", "Total Price: $"+ totalPrice[0]);
+        model.addAttribute("totalPrice", "Total Price: $" + totalPrice[0]);
         session.setAttribute("cart", null);
         Order order = Order.builder()
                 .productList(productList)
@@ -72,6 +84,19 @@ public class ProductServiceImpl {
                 .build();
         session.setAttribute("order", order);
         model.addAttribute("order", order);
+    }
+
+    public Product getProductById(Long id) {
+        return productRepositories.findById(id).orElseThrow(() -> new NullPointerException("No such product found with ID: " + id));
+    }
+
+
+    public void deleteProductById(Long id) {
+        productRepositories.deleteById(id);
+    }
+
+    public List<Product> getProductByName(String name){
+        return productRepositories.findByProductName(name);
     }
 
 }

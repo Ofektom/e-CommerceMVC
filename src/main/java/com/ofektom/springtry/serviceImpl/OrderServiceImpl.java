@@ -29,7 +29,7 @@ public class OrderServiceImpl {
         Users user = usersService.findUsersById.apply((Long) session.getAttribute("userID"));
         Order order = (Order) session.getAttribute("order");
         if (user.getBalance().doubleValue()<order.getTotalPrice().doubleValue()){
-            model.addAttribute("paid", "Insufficient balance na dey your account!");
+            model.addAttribute("paid", "Sufficient balance no dey your account!");
             return "checkout";
         }
         user.setBalance(user.getBalance().subtract(order.getTotalPrice()));

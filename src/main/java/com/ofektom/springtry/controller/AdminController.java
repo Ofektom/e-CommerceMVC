@@ -46,7 +46,7 @@ public class AdminController {
     public String signUp(@ModelAttribute AdminDTO adminDTO){
         Admin admin = adminService.saveAdmin.apply(new Admin(adminDTO));
         log.info("Admin details ---> {}", admin);
-        return "successful-register";
+        return "admin-successful";
     }
 
     @PostMapping("/admin-login")
@@ -60,7 +60,7 @@ public class AdminController {
                         .build())){
             HttpSession session = request.getSession();
             session.setAttribute("userID", admin.getId());
-            return "redirect:/products/all";
+            return "admin-dashboard";
         }
         return "redirect:/admin/admin-login";
     }

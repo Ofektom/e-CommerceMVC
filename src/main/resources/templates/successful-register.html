@@ -74,69 +74,67 @@
             height: 100px;
         }
 
-        .login{
-            height: 200px;
+        h1{
+            font-family: 'Hammersmith One', sans-serif;
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 2px;
         }
-        .user-login #hero {
-            display: block;
-            position relative
-            padding 50px 100px 50px 100px
-            margin: auto;
-            width: 400px;
-            height: 400px;
-            display: flex;
-            justify-content: center;
-        }
-        #hero{
-            /* background-image: url("https://images.pexels.com/photos/3568518/pexels-photo-3568518.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
-            height: 150vh;
+        #home-second {
+            height: 600px;
             width: 100%;
-            background-size: 140px;
-            background-position: top 25% right 3;
+            background-size: 1500px;
+            background-position: top 25%;
             padding: 0 40px;
+            color: aliceblue;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            /* background-attachment: fixed;
-            background-repeat: no-repeat; */
+            /*background-attachment: fixed;*/
+            /*background-repeat: no-repeat;*/
 
         }
-        #hero h4{
-            padding-bottom: 15px;
-        }
-        #hero h1{
-            color: #088178;
-            padding-bottom: 15px;
+        #feature{
+            background-color: aliceblue;
         }
 
-        #hero button{
-            /* background-image: url("https://images.pexels.com/photos/3568650/pexels-photo-3568650.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
-            background-color: #088178;
-            border: 0;
-            color: #fff;
-            padding: 10px 40px 10px 40px;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 15px;
-        }
-        #hero p{
-            padding-bottom: 1px;
-        }
         #feature .fe-box{
-            width: 180px;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
             text-align: center;
+
+        }
+        #feature .fe-container{
             padding: 25px 15px;
             box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
             border: 1px solid #cce7d0;
             border-radius: 4px;
             margin: 2rem 5rem;
+            background-color: white;
         }
+
         #feature .fe-box:hover{
             box-shadow: 10px 10px 54px rgb(70,62,221,0.1);
         }
+        p{
 
+        }
+
+        footer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #088178;
+            height: 50px;
+            width: auto;
+            color: white;
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
     <title>FASHION SHOP</title>
     <link rel="stylesheet" href="css/style.css">
@@ -155,7 +153,11 @@
         </ul>
     </div>
 </section>
+<section id="home-second">
 <a href="/user/login">Login </a>
-
+</section>
+<footer>
+    <p>&copy ofektom fashion shop  ||  +2347060926577</p>
+</footer>
 </body>
 </html>

@@ -24,9 +24,9 @@
       align-items: center;
       padding: 40px 80px;
       background: #bddadb;
-      /*box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);*/
-      /*z-index: 999;*/
-      /*position: sticky;*/
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+      z-index: 999;
+      position: sticky;
       top: 0;
       left: 0;
     }
@@ -73,56 +73,56 @@
       width: 120px;
       height: 100px;
     }
+    #home-second {
+      height: 500px;
+      width: 100%;
+    }
+    h2{
+      position: relative;
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
 
-    h1{
-      font-family: 'Hammersmith One', sans-serif;
-      font-size: 50px;
+    #login-form1{
+      width: 400px;
+      position:relative;
+      margin: auto;
+      padding: 20px 50px;
+      justify-content: center;
+      border: #bddadb groove thick;
+      border-radius: 2.5rem;
+    }
+
+    input{
+      display: block;
+      width: 300px;
+      margin-bottom: 15px;
+      padding: 20px 50px;
+      justify-content: center;
+    }
+    button {
+      background-color: #088178;
+      color: #ffffff;
+      padding: 0.8rem 2.4rem;
+      border: none;
+      border-radius: 2.5rem;
+      font-family: Ibarra Real Nova,serif;
+      font-size: 16px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
       letter-spacing: 2px;
-    }
-    #home-second {
-      height: 600px;
-      width: 100%;
-      /*background-size: 1500px;*/
-      /*background-position: top 25%;*/
-      /*padding: 0 40px;*/
-      /*color: aliceblue;*/
+      position: relative;
+      margin: auto;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      /*background-attachment: fixed;*/
-      /*background-repeat: no-repeat;*/
-
-    }
-    #feature{
-      background-color: aliceblue;
     }
 
-    #feature .fe-box{
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-      text-align: center;
 
-    }
-    #feature .fe-container{
-      padding: 25px 15px;
-      box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
-      border: 1px solid #cce7d0;
-      border-radius: 4px;
-      margin: 2rem 5rem;
-      background-color: white;
-    }
-
-    #feature .fe-box:hover{
-      box-shadow: 10px 10px 54px rgb(70,62,221,0.1);
-    }
-    p{
-
-    }
     footer{
       display: flex;
       justify-content: center;
@@ -136,7 +136,6 @@
     }
   </style>
   <title>FASHION SHOP</title>
-  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
@@ -146,29 +145,19 @@
   <div>
     <ul id="navbar">
       <li><a href="/">Shop</a></li>
-      <li><a href="/user/login">Customer</a></li>
-      <li><a class="active" href="checkout.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+      <li><a class="active" href="/user/login">Customer</a></li>
+      <li><a href="/user/register">Sign up</a></li>
+      <li><a href="/products/noCart"><i class="fa-solid fa-cart-shopping"></i></a></li>
     </ul>
   </div>
 </section>
 <section id="home-second">
-<table>
-  <b th:text="${paid}"></b>
-  <div> Payment </div>
-  <thead>
-  <td>Product Name</td>
-  <td>Price</td>
-  <td>Pay</td>
-  <td>Delete</td>
-  </thead>
-  <tr th:each="product: ${products}">
-    <td th:text="${product.productName}"></td>
-    <td th:text="${product.price}"></td>
-    <td ><a th:href="@{/products/add-cart(cart=${product.id})}">Pay</a></td>
-  </tr>
-  <tr ><td th:text="${totalPrice}"> <td></tr>
-  <a href="/products/pay">Proceed checkout</a>
-</table>
+  <h2>Customer Log in</h2>
+  <form method="post" action="/user/login?cart=something" th:object="${user}">
+    Username: <input  type="text" name="username" placeholder="email">
+    Password: <input type="password" name="password" placeholder="password">
+    <button type="submit">Login</button>
+  </form>
 </section>
 <footer>
   <p>&copy ofektom fashion shop  ||  +2347060926577</p>
